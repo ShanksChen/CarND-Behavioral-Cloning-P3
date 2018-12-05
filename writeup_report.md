@@ -69,13 +69,14 @@ Then I run the simulator, the terminal showed this
 
 ![alt text][image5]
 
-And I ask the mentor in the student hub about this problem, he can't give me effective solution. So I can only use the workspace provided by udacity.
+And I asked the mentor in the student hub about this problem, he can't give me effective solution. So I can only use the workspace provided by udacity.
 
 In addition, the connection to the workspace and the simulator in the VM is very bad. After many attempts, I can only choose to use the sample drive data in the workspace for the project.
 
 #### 1. A tried architecture
 
-At the beginning, I use the LeNet-5 architecture. It consists of a normalization layer, followed by two convolutional layers, followed by three fully connected layers. After every convolutional layers, I add a max pooling layer. Moreover I add dropout function after first two fully connected layers to avoid over fitting(model.py lines 47-59). The normalization layer I used in the appropriate model architecture is same as in this architecture. So I will explain it later.
+At the beginning, I used the LeNet-5 architecture. It consists of a normalization layer, followed by two convolutional layers, followed by three fully connected layers. After every convolutional layers, I addde a max pooling layer. Moreover I added dropout layer after first two fully connected layers to avoid over fitting(model.py lines 47-59). The normalization layer I used in the appropriate model architecture is same as in this architecture. So I will explain it later.
+
 The loss of this architecture shows in below picture
 
 ![alt text][image6]
@@ -84,15 +85,15 @@ The training result seems good. But when test it in the autonomous mode, It can'
 
 #### 2. An appropriate model architecture has been employed
 
-My model which published by the autonomous vehicle team at NVIDIA consists of  a normalization layer, followed by five convolutional layers, followed by four fully connected layers. (model.py lines 62-80) 
+My model which published by [the autonomous vehicle team at NVIDIA](https://devblogs.nvidia.com/deep-learning-self-driving-cars/) consists of a normalization layer, followed by five convolutional layers, followed by four fully connected layers. (model.py lines 62-80) 
 
-The data is normalized in the model using a Keras lambda layer (model.py line 64) and a Cropping2D function (code line 65).
+The data is normalized in the model using a Keras lambda layer (model.py line 64) and a Cropping2D function (code line 65). The lamdba layer can be used to create arbitrary functions that operate on each image as it passes through the layer. I used equation as (pixel value / 255.0) - 0.5). This equation arranges the pixel value in a range between -0.5 and 0.5 and the element mean is 0. The Cropping2D function removes the useless pixels on the top and bottom of the image.
 
 The first three convolutional layers in the model using stride 2 and "ReLU" activation function (model.py lines 67-69).
 
-The other two convolutional layers in the model using default stride and "ReLU" activation function (model.py lines 70-71).
+The other two convolutional layers in the model using non-strided and "ReLU" activation function (model.py lines 70-71).
 
-After the convolutional layers, I added a flatten layer (model.py lines 72).
+After the convolutional layers, there was a flatten layer (model.py lines 72).
 
 Next there were four fulluy connected layers (model.py lines 74-80).
 
