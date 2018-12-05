@@ -85,13 +85,14 @@ The training result seems good. But when test it in the autonomous mode, It can'
 
 #### 2. An appropriate model architecture has been employed
 
-My model which published by [the autonomous vehicle team at NVIDIA](https://devblogs.nvidia.com/deep-learning-self-driving-cars/) consists of a normalization layer, followed by five convolutional layers, followed by four fully connected layers. (model.py lines 62-80) 
+My model which published by [the autonomous vehicle team at NVIDIA](https://devblogs.nvidia.com/deep-learning-self-driving-cars/) consists of a normalization layer, followed by five convolutional layers, followed by four fully connected layers(model.py lines 62-80). The network by NVIDIA has about 27 million connections and 250 thousand parameters. But my project doesn't have as many parameters.
 
-The data is normalized in the model using a Keras lambda layer (model.py line 64) and a Cropping2D function (code line 65). The lamdba layer can be used to create arbitrary functions that operate on each image as it passes through the layer. I used equation as (pixel value / 255.0) - 0.5). This equation arranges the pixel value in a range between -0.5 and 0.5 and the element mean is 0. The Cropping2D function removes the useless pixels on the top and bottom of the image.
+The data is normalized in the model using a Keras lambda layer (model.py line 64) and a Cropping2D function (code line 65).
+The lamdba layer can be used to create arbitrary functions that operate on each image as it passes through the layer. I used equation as (pixel value / 255.0) - 0.5). This equation arranges the pixel value in a range between -0.5 and 0.5 and the element mean is 0. The Cropping2D function removes the useless pixels on the top and bottom of the image.
 
-The first three convolutional layers in the model using stride 2 and "ReLU" activation function (model.py lines 67-69).
+After the normalize layer, there ate three convolutional layers in the model with 2×2 stride, a 5×5 kernel and "ReLU" activation function (model.py lines 67-69).
 
-The other two convolutional layers in the model using non-strided and "ReLU" activation function (model.py lines 70-71).
+The other two convolutional layers in the model with a non-strided, a 3×3 kernel and "ReLU" activation function (model.py lines 70-71).
 
 After the convolutional layers, there was a flatten layer (model.py lines 72).
 
@@ -148,9 +149,9 @@ Let's talk about the sample drive data. *Using this method carries two benefits.
 
 Therefore, I did data augementation. 
 
-### Result
+### Conclusion
 
-I just keep the car on the first track.
+I just keep the car on the first track by the model. I haved tested four situation on the track two, but failed.
 
 I really want to finish this project on my local computer, but the problem I mentioned before has plagued me for nearly three days. I have to choose to complete this project on the workspace.
 
